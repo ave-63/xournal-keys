@@ -13,7 +13,7 @@ function initUi()
   app.registerUi({["menu"] = "Paste", ["callback"] = "paste", ["accelerator"] = "v"});
   app.registerUi({["menu"] = "Cut", ["callback"] = "cut", ["accelerator"] = "x"});
   app.registerUi({["menu"] = "Delete", ["callback"] = "delete", ["accelerator"] = "t"});
-  app.registerUi({["menu"] = "Ruler", ["callback"] = "ruler", ["accelerator"] = "w"});
+--  app.registerUi({["menu"] = "Ruler", ["callback"] = "ruler", ["accelerator"] = "w"});
   app.registerUi({["menu"] = "Eraser", ["callback"] = "eraser", ["accelerator"] = "e"});
 end
 
