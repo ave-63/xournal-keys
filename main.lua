@@ -15,6 +15,21 @@ function initUi()
   app.registerUi({["menu"] = "Delete", ["callback"] = "delete", ["accelerator"] = "t"});
 --  app.registerUi({["menu"] = "Ruler", ["callback"] = "ruler", ["accelerator"] = "w"});
   app.registerUi({["menu"] = "Eraser", ["callback"] = "eraser", ["accelerator"] = "e"});
+  app.registerUi({["menu"] = "Colors/black", ["callback"] = "black", ["accelerator"] = "1"});
+  app.registerUi({["menu"] = "Colors/red", ["callback"] = "red", ["accelerator"] = "2"});
+  app.registerUi({["menu"] = "Colors/green", ["callback"] = "green", ["accelerator"] = "3"});
+end
+
+function black()
+	app.changeToolColor({["color"] = 0x000000, ["tool"] = "pen"})
+end
+
+function red()
+	app.changeToolColor({["color"] = 0xff0000, ["tool"] = "pen"})
+end
+
+function green()
+	app.changeToolColor({["color"] = 0x00ff00, ["tool"] = "pen"})
 end
 
 function lasso()
