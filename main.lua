@@ -23,15 +23,15 @@ function initUi()
 end
 
 function black()
-	app.changeToolColor({["color"] = 0x000000, ["tool"] = "pen"})
+	app.changeToolColor({["color"] = 0x000000, ["tool"] = "pen", ["selection"] = true})
 end
 
 function red()
-	app.changeToolColor({["color"] = 0xff0000, ["tool"] = "pen"})
+	app.changeToolColor({["color"] = 0xff0000, ["tool"] = "pen", ["selection"] = true})
 end
 
 function green()
-	app.changeToolColor({["color"] = 0x00ff00, ["tool"] = "pen"})
+	app.changeToolColor({["color"] = 0x00ff00, ["tool"] = "pen", ["selection"] = true})
 end
 
 function hand()
