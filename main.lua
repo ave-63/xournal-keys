@@ -5,8 +5,14 @@
 -- Register all Toolbar actions and intialize all UI stuff
 function initUi()
   app.registerUi({["menu"] = "Select Region", ["callback"] = "lasso", ["accelerator"] = "g"});
-  app.registerUi({["menu"] = "Pen", ["callback"] = "pen", ["accelerator"] = "f"});
-  app.registerUi({["menu"] = "Highlighter", ["callback"] = "highlighter", ["accelerator"] = "<Shift>f"});
+  app.registerUi({["menu"] = "Blue Pen", ["callback"] = "blue_pen", ["accelerator"] = "f"});
+  app.registerUi({["menu"] = "Red Pen", ["callback"] = "red_pen", ["accelerator"] = "d"});
+  app.registerUi({["menu"] = "Green Pen", ["callback"] = "green_pen", ["accelerator"] = "s"});
+  app.registerUi({["menu"] = "Orange Pen", ["callback"] = "orange_pen", ["accelerator"] = "a"});
+  app.registerUi({["menu"] = "Blue Highlighter", ["callback"] = "blue_highlighter", ["accelerator"] = "<Shift>f"});
+  app.registerUi({["menu"] = "Red Highlighter", ["callback"] = "red_highlighter", ["accelerator"] = "<Shift>d"});
+  app.registerUi({["menu"] = "Green Highlighter", ["callback"] = "green_highlighter", ["accelerator"] = "<Shift>s"});
+  app.registerUi({["menu"] = "Yellow Highlighter", ["callback"] = "yellow_highlighter", ["accelerator"] = "<Shift>a"});
   app.registerUi({["menu"] = "Undo", ["callback"] = "undo", ["accelerator"] = "r"});
   app.registerUi({["menu"] = "Redo", ["callback"] = "redo", ["accelerator"] = "<Shift>r"});
   app.registerUi({["menu"] = "Copy", ["callback"] = "copy", ["accelerator"] = "c"});
@@ -21,12 +27,44 @@ function lasso()
   app.uiAction({["action"] = "ACTION_TOOL_SELECT_REGION"})
 end
 
-function pen()
+function blue_pen()
   app.uiAction({["action"] = "ACTION_TOOL_PEN"})
+  app.changeToolColor({["color"] = 0x3333CC, ["tool"] = "pen"})
 end
 
-function highlighter()
-  app.uiAction({["action"] = "ACTION_TOOL_HILIGHTER"})
+function red_pen()
+  app.uiAction({["action"] = "ACTION_TOOL_PEN"})
+  app.changeToolColor({["color"] = 0xEE0000, ["tool"] = "pen"})
+end
+
+function green_pen()
+  app.uiAction({["action"] = "ACTION_TOOL_PEN"})
+  app.changeToolColor({["color"] = 0x008000, ["tool"] = "pen"})
+end
+
+function orange_pen()
+  app.uiAction({["action"] = "ACTION_TOOL_PEN"})
+  app.changeToolColor({["color"] = 0xEF7000, ["tool"] = "pen"})
+end
+
+function blue_highlighter()
+  app.uiAction({["action"] = "ACTION_TOOL_HIGHLIGHTER"})
+  app.changeToolColor({["color"] = 0x00C0FF, ["tool"] = "highlighter"})
+end
+
+function red_highlighter()
+  app.uiAction({["action"] = "ACTION_TOOL_HIGHLIGHTER"})
+  app.changeToolColor({["color"] = 0xFF22FF, ["tool"] = "highlighter"})
+end
+
+function green_highlighter()
+  app.uiAction({["action"] = "ACTION_TOOL_HIGHLIGHTER"})
+  app.changeToolColor({["color"] = 0x00FF00, ["tool"] = "highlighter"})
+end
+
+function yellow_highlighter()
+  app.uiAction({["action"] = "ACTION_TOOL_HIGHLIGHTER"})
+  app.changeToolColor({["color"] = 0xEEFF00, ["tool"] = "highlighter"})
 end
 
 function undo()
