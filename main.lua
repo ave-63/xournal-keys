@@ -21,6 +21,7 @@ function initUi()
   app.registerUi({["menu"] = "Delete", ["callback"] = "delete", ["accelerator"] = "t"});
 --  app.registerUi({["menu"] = "Ruler", ["callback"] = "ruler", ["accelerator"] = "w"});
   app.registerUi({["menu"] = "Eraser", ["callback"] = "eraser", ["accelerator"] = "e"});
+  app.registerUi({["menu"] = "Select Object", ["callback"] = "select_object", ["accelerator"] = "<Shift>g"});
 end
 
 function lasso()
@@ -34,7 +35,7 @@ end
 
 function red_pen()
   app.uiAction({["action"] = "ACTION_TOOL_PEN"})
-  app.changeToolColor({["color"] = 0xEE0000, ["tool"] = "pen"})
+  app.changeToolColor({["color"] = 0xEF0044, ["tool"] = "pen"})
 end
 
 function green_pen()
@@ -49,12 +50,13 @@ end
 
 function blue_highlighter()
   app.uiAction({["action"] = "ACTION_TOOL_HIGHLIGHTER"})
-  app.changeToolColor({["color"] = 0x00C0FF, ["tool"] = "highlighter"})
+  app.changeToolColor({["color"] = 0x20D0FF, ["tool"] = "highlighter"})
 end
 
 function red_highlighter()
   app.uiAction({["action"] = "ACTION_TOOL_HIGHLIGHTER"})
-  app.changeToolColor({["color"] = 0xFF22FF, ["tool"] = "highlighter"})
+  app.changeToolColor({["color"] = 0xFF55FF, ["tool"] = "highlighter"})
+--  app.changeToolColor({["color"] = 0xFF22FF, ["tool"] = "highlighter"})
 end
 
 function green_highlighter()
@@ -96,6 +98,9 @@ function eraser()
   app.uiAction({["action"] = "ACTION_TOOL_ERASER"})
 end
 
+function select_object()
+  app.uiAction({["action"] = "ACTION_TOOL_SELECT_OBJECT"})
+end
 -- Disable this because it doesn't turn the ruler off again
 -- function ruler()
 --   app.uiAction({["action"] = "ACTION_RULER"})
