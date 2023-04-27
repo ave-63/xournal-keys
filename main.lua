@@ -1,79 +1,92 @@
 -- Things I might want to add:
--- -ACTION_ROTATION_SNAPPING
--- -ACTION_GRID_SNAPPING
--- -ACTION_RULER (Does this toggle ruler, or is there a way to specify on/off?)
+-- -ACTION_TOOL_DRAW_COORDINATE_SYSTEM (currently no way to turn it off!)
+-- -ACTION_TOOL_DRAW_LINE currently doesn't exist!
+
+
 -- Register all Toolbar actions and intialize all UI stuff
 function initUi()
+  app.registerUi({["menu"] = "Pen", ["callback"] = "pen", ["accelerator"] = "w"});
+  app.registerUi({["menu"] = "Highlighter", ["callback"] = "highlighter", ["accelerator"] = "q"});
   app.registerUi({["menu"] = "Select Region", ["callback"] = "lasso", ["accelerator"] = "g"});
-  app.registerUi({["menu"] = "Blue Pen", ["callback"] = "blue_pen", ["accelerator"] = "f"});
-  app.registerUi({["menu"] = "Red Pen", ["callback"] = "red_pen", ["accelerator"] = "d"});
-  app.registerUi({["menu"] = "Green Pen", ["callback"] = "green_pen", ["accelerator"] = "s"});
-  app.registerUi({["menu"] = "Orange Pen", ["callback"] = "orange_pen", ["accelerator"] = "a"});
-  app.registerUi({["menu"] = "Blue Highlighter", ["callback"] = "blue_highlighter", ["accelerator"] = "<Shift>f"});
-  app.registerUi({["menu"] = "Red Highlighter", ["callback"] = "red_highlighter", ["accelerator"] = "<Shift>d"});
-  app.registerUi({["menu"] = "Green Highlighter", ["callback"] = "green_highlighter", ["accelerator"] = "<Shift>s"});
-  app.registerUi({["menu"] = "Yellow Highlighter", ["callback"] = "yellow_highlighter", ["accelerator"] = "<Shift>a"});
+  app.registerUi({["menu"] = "Blue Tool", ["callback"] = "blue_tool", ["accelerator"] = "f"});
+  app.registerUi({["menu"] = "Red Tool", ["callback"] = "red_tool", ["accelerator"] = "d"});
+  app.registerUi({["menu"] = "Green Tool", ["callback"] = "green_tool", ["accelerator"] = "s"});
+  app.registerUi({["menu"] = "Orange Tool", ["callback"] = "orange_tool", ["accelerator"] = "a"});
   app.registerUi({["menu"] = "Undo", ["callback"] = "undo", ["accelerator"] = "r"});
   app.registerUi({["menu"] = "Redo", ["callback"] = "redo", ["accelerator"] = "<Shift>r"});
-  app.registerUi({["menu"] = "Copy", ["callback"] = "copy", ["accelerator"] = "c"});
-  app.registerUi({["menu"] = "Paste", ["callback"] = "paste", ["accelerator"] = "v"});
-  app.registerUi({["menu"] = "Cut", ["callback"] = "cut", ["accelerator"] = "x"});
+  app.registerUi({["menu"] = "Copy", ["callback"] = "copy", ["accelerator"] = "<Control>c"});
+  app.registerUi({["menu"] = "Paste", ["callback"] = "paste", ["accelerator"] = "<Control>v"});
+  app.registerUi({["menu"] = "Cut", ["callback"] = "cut", ["accelerator"] = "<Control>x"});
   app.registerUi({["menu"] = "Delete", ["callback"] = "delete", ["accelerator"] = "t"});
---  app.registerUi({["menu"] = "Ruler", ["callback"] = "ruler", ["accelerator"] = "w"});
   app.registerUi({["menu"] = "Eraser", ["callback"] = "eraser", ["accelerator"] = "e"});
   app.registerUi({["menu"] = "Select Object", ["callback"] = "select_object", ["accelerator"] = "<Shift>g"});
+  -- app.registerUi({["menu"] = "Draw Coordinates", ["callback"] = "draw_coords", ["accelerator"] = "c"});
+  -- app.registerUi({["menu"] = "Tool Default", ["callback"] = "tool_default", ["accelerator"] = "v"});
+end
+
+-- "pen" or "highlighter";
+local currentTool = "pen"
+
+function pen()
+  app.uiAction({["action"] = "ACTION_TOOL_PEN"})
+  currentTool = "pen"
+end
+
+function highlighter()
+  app.uiAction({["action"] = "ACTION_TOOL_HIGHLIGHTER"})
+  currentTool = "highlighter"
+end
+
+function blue_tool()
+  if (currentTool == "pen") then
+    -- This changes the color of currently selected strokes
+    app.changeToolColor({["color"] = 0x3333CC, ["selection"] = true})
+    -- This changes the color of the pen
+    app.changeToolColor({["color"] = 0x3333CC, ["tool"] = "pen"})
+  end
+  if (currentTool == "highlighter") then
+    app.changeToolColor({["color"] = 0x20D0FF, ["tool"] = "highlighter"})
+  end
+end
+
+function green_tool()
+  if (currentTool == "pen") then
+    app.changeToolColor({["color"] = 0x008000, ["selection"] = true})
+    app.changeToolColor({["color"] = 0x008000, ["tool"] = "pen"})
+  end
+  if (currentTool == "highlighter") then
+    app.changeToolColor({["color"] = 0x00FF00, ["tool"] = "highlighter"})
+  end
+end
+
+function red_tool()
+  if (currentTool == "pen") then
+    app.changeToolColor({["color"] = 0xEF0044, ["selection"] = true})
+    app.changeToolColor({["color"] = 0xEF0044, ["tool"] = "pen"})
+  end
+  if (currentTool == "highlighter") then
+    app.changeToolColor({["color"] = 0xFF55FF, ["tool"] = "highlighter"})
+  end
+end
+
+function orange_tool()
+  if (currentTool == "pen") then
+    app.changeToolColor({["color"] = 0xEF7000, ["selection"] = true})
+    app.changeToolColor({["color"] = 0xEF7000, ["tool"] = "pen"})
+  end
+  if (currentTool == "highlighter") then
+    app.changeToolColor({["color"] = 0xEEFF00, ["tool"] = "highlighter"})
+  end
 end
 
 function lasso()
   app.uiAction({["action"] = "ACTION_TOOL_SELECT_REGION"})
 end
 
-function blue_pen()
-  app.uiAction({["action"] = "ACTION_TOOL_PEN"})
-  app.changeToolColor({["color"] = 0x3333CC, ["tool"] = "pen"})
-end
-
-function red_pen()
-  app.uiAction({["action"] = "ACTION_TOOL_PEN"})
-  app.changeToolColor({["color"] = 0xEF0044, ["tool"] = "pen"})
-end
-
-function green_pen()
-  app.uiAction({["action"] = "ACTION_TOOL_PEN"})
-  app.changeToolColor({["color"] = 0x008000, ["tool"] = "pen"})
-end
-
-function orange_pen()
-  app.uiAction({["action"] = "ACTION_TOOL_PEN"})
-  app.changeToolColor({["color"] = 0xEF7000, ["tool"] = "pen"})
-end
-
-function blue_highlighter()
-  app.uiAction({["action"] = "ACTION_TOOL_HIGHLIGHTER"})
-  app.changeToolColor({["color"] = 0x20D0FF, ["tool"] = "highlighter"})
-end
-
-function red_highlighter()
-  app.uiAction({["action"] = "ACTION_TOOL_HIGHLIGHTER"})
-  app.changeToolColor({["color"] = 0xFF55FF, ["tool"] = "highlighter"})
---  app.changeToolColor({["color"] = 0xFF22FF, ["tool"] = "highlighter"})
-end
-
-function green_highlighter()
-  app.uiAction({["action"] = "ACTION_TOOL_HIGHLIGHTER"})
-  app.changeToolColor({["color"] = 0x00FF00, ["tool"] = "highlighter"})
-end
-
-function yellow_highlighter()
-  app.uiAction({["action"] = "ACTION_TOOL_HIGHLIGHTER"})
-  app.changeToolColor({["color"] = 0xEEFF00, ["tool"] = "highlighter"})
-end
-
 function undo()
   app.uiAction({["action"] = "ACTION_UNDO"})
 end
 
--- This doesn't work?
 function redo()
   app.uiAction({["action"] = "ACTION_REDO"})
 end
@@ -101,7 +114,17 @@ end
 function select_object()
   app.uiAction({["action"] = "ACTION_TOOL_SELECT_OBJECT"})
 end
+
 -- Disable this because it doesn't turn the ruler off again
 -- function ruler()
 --   app.uiAction({["action"] = "ACTION_RULER"})
+-- end
+
+-- function draw_coords()
+--   app.uiAction({["action"] = "ACTION_TOOL_DRAW_COORDINATE_SYSTEM"})
+-- end
+
+-- Disabled because default is thin black line, instead of previous thickness/color
+-- function tool_default()
+--  app.uiAction({["action"] = "ACTION_TOOL_DEFAULT"})
 -- end
