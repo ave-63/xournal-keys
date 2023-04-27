@@ -20,8 +20,8 @@ function initUi()
   app.registerUi({["menu"] = "Delete", ["callback"] = "delete", ["accelerator"] = "t"});
   app.registerUi({["menu"] = "Eraser", ["callback"] = "eraser", ["accelerator"] = "e"});
   app.registerUi({["menu"] = "Select Object", ["callback"] = "select_object", ["accelerator"] = "<Shift>g"});
-  -- app.registerUi({["menu"] = "Draw Coordinates", ["callback"] = "draw_coords", ["accelerator"] = "c"});
-  -- app.registerUi({["menu"] = "Tool Default", ["callback"] = "tool_default", ["accelerator"] = "v"});
+  app.registerUi({["menu"] = "Draw Coordinates", ["callback"] = "draw_coords", ["accelerator"] = "c"});
+  app.registerUi({["menu"] = "Ruler", ["callback"] = "ruler", ["accelerator"] = "v"});
 end
 
 -- "pen" or "highlighter";
@@ -29,11 +29,15 @@ local currentTool = "pen"
 
 function pen()
   app.uiAction({["action"] = "ACTION_TOOL_PEN"})
+  app.uiAction({["action"] = "ACTION_TOOL_DRAW_COORDINATE_SYSTEM", ["enabled"] = false})
+  app.uiAction({["action"] = "ACTION_TOOL_RULER", ["enabled"] = false})
   currentTool = "pen"
 end
 
 function highlighter()
   app.uiAction({["action"] = "ACTION_TOOL_HIGHLIGHTER"})
+  app.uiAction({["action"] = "ACTION_TOOL_DRAW_COORDINATE_SYSTEM", ["enabled"] = false})
+  app.uiAction({["action"] = "ACTION_TOOL_RULER", ["enabled"] = false})
   currentTool = "highlighter"
 end
 
@@ -115,16 +119,15 @@ function select_object()
   app.uiAction({["action"] = "ACTION_TOOL_SELECT_OBJECT"})
 end
 
--- Disable this because it doesn't turn the ruler off again
--- function ruler()
---   app.uiAction({["action"] = "ACTION_RULER"})
--- end
+function ruler()
+  app.uiAction({["action"] = "ACTION_TOOL_PEN"})
+  app.uiAction({["action"] = "ACTION_RULER"})
+  currentTool = "pen"
+end
 
--- function draw_coords()
---   app.uiAction({["action"] = "ACTION_TOOL_DRAW_COORDINATE_SYSTEM"})
--- end
+function draw_coords()
+  app.uiAction({["action"] = "ACTION_TOOL_PEN"})
+  app.uiAction({["action"] = "ACTION_TOOL_DRAW_COORDINATE_SYSTEM"})
+  currentTool = "pen"
+end
 
--- Disabled because default is thin black line, instead of previous thickness/color
--- function tool_default()
---  app.uiAction({["action"] = "ACTION_TOOL_DEFAULT"})
--- end
