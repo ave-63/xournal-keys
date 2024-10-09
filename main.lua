@@ -10,11 +10,11 @@ function initUi()
   app.registerUi({["menu"] = "Select Region", ["callback"] = "lasso", ["accelerator"] = "g"});
   
   app.registerUi({["menu"] = "Blue Pen", ["callback"] = "blue_pen", ["accelerator"] = "f"});
-  app.registerUi({["menu"] = "Red Pen", ["callback"] = "red_pen", ["accelerator"] = "d"});
+  app.registerUi({["menu"] = "Red Pen", ["callback"] = "red_pen", ["accelerator"] = "c"});
   app.registerUi({["menu"] = "Green Pen", ["callback"] = "green_pen", ["accelerator"] = "s"});
   app.registerUi({["menu"] = "Orange Pen", ["callback"] = "orange_pen", ["accelerator"] = "a"});
   app.registerUi({["menu"] = "Cyan Pen", ["callback"] = "cyan_pen", ["accelerator"] = "z"});
-  app.registerUi({["menu"] = "Magenta Pen", ["callback"] = "magenta_pen", ["accelerator"] = "c"});
+  app.registerUi({["menu"] = "Magenta Pen", ["callback"] = "magenta_pen", ["accelerator"] = "d"});
   app.registerUi({["menu"] = "Lime Pen", ["callback"] = "lime_pen", ["accelerator"] = "x"});
   app.registerUi({["menu"] = "Black Pen", ["callback"] = "black_pen", ["accelerator"] = "v"});
 
@@ -62,7 +62,7 @@ function blue_pen()
   app.uiAction({["action"] = "ACTION_TOOL_DRAW_COORDINATE_SYSTEM", ["enabled"] = false})
   app.uiAction({["action"] = "ACTION_TOOL_RULER", ["enabled"] = false})
   -- This changes the color of the pen
-  app.changeToolColor({["color"] = 0x3333CC, ["tool"] = "pen"})
+  app.changeToolColor({["color"] = 0x1313CC, ["tool"] = "pen"})
 end
 
 function blue_hl()
@@ -79,7 +79,7 @@ function green_pen()
   app.uiAction({["action"] = "ACTION_TOOL_DRAW_COORDINATE_SYSTEM", ["enabled"] = false})
   app.uiAction({["action"] = "ACTION_TOOL_RULER", ["enabled"] = false})
   -- This changes the color of the pen
-  app.changeToolColor({["color"] = 0x008000, ["tool"] = "pen"})
+  app.changeToolColor({["color"] = 0x00A000, ["tool"] = "pen"})
 end
 
 function green_hl()
